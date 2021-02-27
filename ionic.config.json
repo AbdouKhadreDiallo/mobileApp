@@ -1,0 +1,7 @@
+{
+  "name": "money-transfert",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
