@@ -1,0 +1,152 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title *ngIf="data.type=='confirmation' || data.type =='retrait' ">Confirmation</ion-title>
+    <ion-title *ngIf="data.type=='reussi'">Transfert réussi</ion-title>
+    <ion-title *ngIf="data.type=='calculateur'">Calculateur</ion-title>
+    <ion-title *ngIf="data.type=='success'">Retrait done</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="data.type=='confirmation'">
+
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <p>Emetteur</p>
+        <h2> {{data.sender.fullname}} </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Téléphone</p>
+        <h2> {{data.sender.telephone}}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>N° CNI</p>
+        <h2> {{data.sender.cin}} </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Montant à envoyer</p>
+        <h2> {{data.montant}} </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Récepteur</p>
+        <h2> {{data.receiver.fullname}} </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Telephone Recepteur/trice</p>
+        <h2> {{data.receiver.telephone}} </h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button class="annuler" (click)="dismiss()" shape="round">annuler</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button class="same" (click)="sendData()" shape="round">Envoyer</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>
+<ion-content *ngIf="data.type=='reussi'">
+  <ion-list>
+    <ion-item>
+      <ion-label style="text-align: center;">
+        <p>infos</p>
+        <h2> Vous avez envoyer {{data['montant']}} à <br> {{data['receiver']['nomComplet']}} <br> le {{data['dateDepot'] | date}} </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>code de transmission</p>
+        <h2> {{data['codeTransmission']}} </h2>
+      </ion-label>
+    </ion-item>
+    
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-icon class="depot-end"  name="refresh-sharp"></ion-icon>
+      </ion-col>
+      <ion-col>
+        <ion-icon class="depot-end" name="mail-open-sharp"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-content *ngIf="data.type=='calculateur'">
+  <div  class="calcul">
+    Pour une transaction de {{data.montant}} le frais est égal à : <br><span> {{data.frais}}F CFA </span>
+  </div>
+  <ion-footer class="ion-no-border" style="text-align: center;">
+    <ion-button (click)="dismiss()" shape="round"> Retour </ion-button>
+  </ion-footer>
+</ion-content>
+<ion-content *ngIf="data.type=='retrait'">
+
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <p>Bénéficiaire</p>
+        <h2> {{data.receiver.nomComplet}} </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Téléphone</p>
+        <h2> {{data.receiver.telephone}}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>N° CNI</p>
+        <h2> {{data.carte}}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Montant à envoyer</p>
+        <h2> {{data.montant}} </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Emetteur</p>
+        <h2> {{data.sender.nomComplet}} </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Telephone</p>
+        <h2> {{data.sender.telephone}} </h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button class="annuler" (click)="dismiss()" shape="round">annuler</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button class="same" (click)="retrait()" shape="round">Confirmer</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>
+
+<ion-content *ngIf="data.type == 'success'" style="text-align: center;" >
+  <h3>Retrait effectué avec success</h3>
+</ion-content>

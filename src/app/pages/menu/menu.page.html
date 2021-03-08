@@ -1,0 +1,32 @@
+
+<ion-content>
+
+  <div  routerLink="/accueil"class="menu-item">
+    <p>
+      <ion-icon name="home-sharp"></ion-icon>
+      <span> Home </span>
+    </p>
+    <div class="bor"></div>
+  </div>
+  <div routerLink="/transactions" class="menu-item-second" *ngIf="isAdmin == true || isUserAgence == true">
+    <p>
+      <ion-icon name="repeat"></ion-icon>
+      <span> Transactions </span>
+    </p>
+    <div class="bor"></div>
+  </div>
+  <div *ngIf="isAdmin" routerLink="/commissions" class="menu-item-second">
+    <p>
+      <ion-icon name="receipt"></ion-icon>
+      <span> Commissions </span>
+    </p>
+    <div class="bor"></div>
+  </div>
+  <div routerLink="/calculateur" class="menu-item-second">
+    <p>
+      <ion-icon name="calculator"></ion-icon>
+      <span> Calculateurs </span>
+    </p>
+  </div>
+  
+</ion-content>

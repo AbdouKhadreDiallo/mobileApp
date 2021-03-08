@@ -1,0 +1,94 @@
+<app-header [data]="{icon:'receipt', page:'Mes commissions'}"></app-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label>type</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item class="datePicker">
+                    <ion-label>du</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item class="datePicker">
+                    <ion-label>au</ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-row>
+        <ion-col col-4>
+            <ion-label class="header">Date</ion-label>
+        </ion-col>
+        <ion-col col-4>
+            <ion-label class="header">Type</ion-label>
+        </ion-col>
+        <ion-col col-4>
+            <ion-label class="header">Montant</ion-label>
+        </ion-col>
+    </ion-row>
+    <div *ngFor="let item of tabTransact | keyvalue">
+        <div *ngIf="item.key == '0'">
+            <div *ngFor="let item of item.value">
+                <ion-row>
+                    <ion-col col-4>
+                        <ion-label class="body"> {{item.dateDepot | date}} </ion-label>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-label class="body">Dépot</ion-label>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-label class="body"> {{item.fraisDepot}} </ion-label>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
+        <div *ngIf="item.key == '1'">
+            <div *ngFor="let item of item.value">
+                <ion-row>
+                    <ion-col col-4>
+                        <ion-label class="body"> {{item.dateDepot | date}} </ion-label>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-label class="body">retrait</ion-label>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-label class="body"> {{item.fraisRetrait}} </ion-label>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
+        <div *ngIf="item.key == '1'">
+            <div *ngFor="let item of item.value">
+                <ion-row>
+                    <ion-col col-4>
+                        <ion-label class="body"> {{item.dateDepot | date}} </ion-label>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-label class="body">depot/retrait</ion-label>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-label class="body"> {{item.fraisRetrait + item.fraisDepot}} </ion-label>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
+    </div>
+    
+    <ion-footer class="ion-no-border">
+        <div class="montant">
+            <div class="total">
+                <span>Total</span>
+            </div>
+            <div class="somme">
+                <span> {{sommeTotal | currency:"XOF":"symbol"}} </span>
+            </div>
+        </div>
+    </ion-footer>
+</ion-content>
+<app-footer></app-footer>

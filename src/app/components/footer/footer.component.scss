@@ -1,0 +1,11 @@
+ion-grid{
+    text-align: center;
+    font-size: 30px;
+    color:  #B3B3B3;
+    
+    
+    .active-item {
+        color: #FA4A0C;
+        --background:none;
+    }
+}

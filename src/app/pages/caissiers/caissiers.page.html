@@ -1,0 +1,76 @@
+<app-header [data]="{icon:'people-sharp', page:'Ajout Caissier'}"></app-header>
+
+<ion-content [fullscreen]="true">
+    <form style="margin-top: 20px;" [formGroup]="create">
+      <ion-item class="no-border">
+        <div class="changeColor">
+          <ion-label position="floating">Firstname</ion-label>
+          <ion-input formControlName="firstname" type="text"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.fullname">
+              <div class="error-message" *ngIf="create.get('firstname').hasError(validation.type) && (create.get('firstname').dirty || create.get('firstname').touched)">
+              <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+              </div>
+            </ng-container>
+            </div>
+        </div>
+      </ion-item>
+      <ion-item class="no-border">
+        <div class="changeColor">
+          <ion-label position="floating">Lastname</ion-label>
+          <ion-input formControlName="lastname" type="text"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.fullname">
+              <div class="error-message" *ngIf="create.get('lastname').hasError(validation.type) && (create.get('lastname').dirty || create.get('lastname').touched)">
+              <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+              </div>
+            </ng-container>
+            </div>
+        </div>
+      </ion-item>
+      <ion-item class="no-border">
+        <div class="changeColor">
+          <ion-label position="floating">email</ion-label>
+          <ion-input formControlName="email"  type="email"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.email">
+              <div class="error-message" *ngIf="create.get('email').hasError(validation.type) && (create.get('email').dirty || create.get('email').touched)">
+              <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+              </div>
+            </ng-container>
+            </div>
+        </div>
+      </ion-item>
+      <ion-item class="no-border">
+        <div class="changeColor">
+          <ion-label position="floating">CIN</ion-label>
+          <ion-input  formControlName="cin" type="text"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.cin">
+              <div class="error-message" *ngIf="create.get('cin').hasError(validation.type) && (create.get('cin').dirty || create.get('cin').touched)">
+              <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+              </div>
+            </ng-container>
+            </div>
+        </div>
+      </ion-item>
+      <ion-item class="no-border">
+        <div class="changeColor">
+          <ion-label position="floating">Téléphone</ion-label>
+          <ion-input formControlName="telephone"  type="text"></ion-input>
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.telephone">
+              <div class="error-message" *ngIf="create.get('telephone').hasError(validation.type) && (create.get('telephone').dirty || create.get('telephone').touched)">
+              <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+              </div>
+            </ng-container>
+            </div>
+        </div>
+      </ion-item>
+      <ion-footer class="ion-no-border" style="float: right; margin-top: 10px;">
+        <ion-button (click)="onSubmit()" style="float: right; margin-right: 20px;">Save</ion-button>
+      </ion-footer>
+    </form>
+</ion-content>
+
+<app-footer></app-footer>

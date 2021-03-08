@@ -1,0 +1,102 @@
+ion-content {
+    ion-list{
+      margin-top: 20px;
+      padding: 0;
+    }
+      --background: #e5e5e5;
+      p {
+        margin-left: 10px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        text-transform: uppercase;
+        font-size: 15px;
+        color: #000000;
+        margin: 0;
+    
+        opacity: 0.5;
+      }
+      h2 {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 17px;
+        color: #000000;
+        margin: 0;
+      }
+    
+      .accordion {
+        margin-top: 20px;
+        width: 100%;
+        background: #ffffff;
+        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.06);
+        border-radius: 30px;
+        form {
+          .ion-label {
+            --min-height: 16px;
+          }
+          ion-item {
+            margin: 0;
+          }
+          ion-footer {
+            position: fixed;
+            left: 0;
+            bottom: 10px;
+            right: 0;
+            ion-button{
+              height: 50px;
+            }
+            
+          }
+        }
+        
+      }
+    }
+    ion-item {
+      --background: none;
+      opacity: 1;
+      --border-style: none;
+    --margin-bottom: 1px;
+    }
+    
+    .sameColor {
+      --background: var(--ion-color-btn);
+    }
+    ion-label {
+      --background: #e5e5e5;
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      color: #000000;
+    
+      opacity: 0.4;
+    }
+    
+    .sameColor{
+      --background: #FA4A0C;
+    }
+    .item-list{
+      background: #e5e5e5;
+      padding-top: 0;
+    }
+  
+    .code {
+      border-bottom: 1px solid #c0c0c0;;
+    }
+  
+    ion-col{
+      text-align: center;
+    }
+    ion-col:hover {
+      border-bottom: 2px solid #fa4a0c;
+      box-shadow: 0px 4px 4px rgba(196, 63, 21, 0.1);
+      border-radius: 40px;
+    }
+    .sameColor {
+      --background: #FA4A0C;
+      position: relative;
+      width: 55%;
+      height: 60px;
+      left: 20%;
+    }

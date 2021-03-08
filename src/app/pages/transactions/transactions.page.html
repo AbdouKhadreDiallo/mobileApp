@@ -1,0 +1,177 @@
+<app-header [data]="{icon:'repeat', page:'Mes Transactions'}"></app-header>
+
+<ion-content [fullscreen]="true">
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngIf="isAdmin">
+                <ion-item>
+                    <ion-label>Users</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-label>type</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item class="datePicker">
+                    <ion-label>du</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item class="datePicker">
+                    <ion-label>au</ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-row *ngIf="!isAdmin">
+
+        <ion-col col-4>
+            <ion-label class="header">Date</ion-label>
+        </ion-col>
+        <ion-col col-4>
+            <ion-label class="header">Type</ion-label>
+        </ion-col>
+        <ion-col col-4>
+            <ion-label class="header">Montant</ion-label>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="isAdmin">
+        <ion-col col-3>
+            <ion-label class="header">Date</ion-label>
+        </ion-col>
+        <ion-col col-3>
+            <ion-label class="header">Utilisateurs</ion-label>
+        </ion-col>
+        <ion-col col-2>
+            <ion-label class="header">Type</ion-label>
+        </ion-col>
+        <ion-col col-2>
+            <ion-label class="header">Montant</ion-label>
+        </ion-col>
+        <ion-col col-2>
+            <ion-label class="header">Frais</ion-label>
+        </ion-col>
+    </ion-row>
+    <div *ngIf="!isAdmin">
+
+        <div *ngFor="let item of itemListData">
+    
+            <ion-row style="margin: 0;">
+                <ion-col col-4>
+                    <ion-label class="body"> {{item.dateDepot | date}} </ion-label>
+                </ion-col>
+                <ion-col col-4>
+                    <ion-label *ngIf="item.adminSystemAuthorDepot || item.userAuthorDepot" class="body">Depôt</ion-label>
+                    <ion-label *ngIf="item.adminSystemAuthorRetrait || item.userAuthorRetrait" class="body">Retrait</ion-label>
+                </ion-col>
+                <ion-col col-4>
+                    <ion-label class="body">{{item.montant}}</ion-label>
+                </ion-col>
+            </ion-row>
+        </div>
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+    </div>
+
+    <div *ngIf="isAdmin">
+        <div *ngFor="let item of tabTransact | keyvalue">
+            <div *ngIf="item.key == '0'">
+                <div *ngFor="let item of item.value">
+               
+               
+                
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-label class="body"> {{item.dateDepot|date}} </ion-label>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-label *ngIf="item.userAuthorDepot!=null" class="body"> {{item.userAuthorDepot.firstname}} {{item.userAuthorDepot.lastname}} </ion-label>
+                            <ion-label *ngIf="item.adminSystemAuthorDepot!=null" class="body"> {{item.adminSystemAuthorDepot.firstname}} {{item.adminSystemAuthorDepot.lastname}} </ion-label>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-label class="body"> dépot </ion-label>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-label class="body"> {{item.montant}} </ion-label>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-label class="body"> {{item.frais}} </ion-label>
+                        </ion-col>
+                    </ion-row>
+                </div>
+                
+            </div>
+            <div *ngIf="item.key == '1'">
+                <div *ngFor="let item of item.value">
+               
+               
+                
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-label class="body"> {{item.dateDepot|date}} </ion-label>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-label *ngIf="item.userAuthorRetrait!=null" class="body"> {{item.userAuthorRetrait.firstname}} {{item.userAuthorRetrait.lastname}} </ion-label>
+                            <ion-label *ngIf="item.adminSystemAuthorRetrait!=null" class="body"> {{item.adminSystemAuthorRetrait.firstname}} {{item.adminSystemAuthorRetrait.lastname}} </ion-label>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-label class="body"> retrait </ion-label>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-label class="body"> {{item.montant}} </ion-label>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-label class="body"> {{item.frais}} </ion-label>
+                        </ion-col>
+                    </ion-row>
+                </div>
+            </div>
+            
+            <div *ngIf="item.key == '2'">
+                <div *ngFor="let item of item.value">
+               
+               
+                
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-label class="body"> {{item.dateDepot|date}} </ion-label>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-label *ngIf="item.userAuthorRetrait!=null" class="body"> {{item.userAuthorRetrait.firstname}} {{item.userAuthorRetrait.lastname}} </ion-label>
+                            <ion-label *ngIf="item.adminSystemAuthorRetrait!=null" class="body"> {{item.adminSystemAuthorRetrait.firstname}} {{item.adminSystemAuthorRetrait.lastname}} </ion-label>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-label class="body"> depot/retrait </ion-label>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-label class="body"> {{item.montant}} </ion-label>
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-label class="body"> {{item.frais}} </ion-label>
+                        </ion-col>
+                    </ion-row>
+                </div>
+            </div>
+           
+            
+        </div>
+    </div>
+
+
+    <ion-footer class="ion-no-border">
+        <div class="montant">
+            <div class="total">
+                <span>Total</span>
+            </div>
+            <div class="somme">
+                <span>{{total | currency:"XOF":"symbol"}}</span>
+            </div>
+        </div>
+    </ion-footer>
+</ion-content>
+<app-footer></app-footer>

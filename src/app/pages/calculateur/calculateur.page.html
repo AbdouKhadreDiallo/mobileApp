@@ -1,0 +1,23 @@
+<app-header [data]="{icon:'calculator', page:'Calculateur'}"></app-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item class="type">
+    <ion-label>Type de transaction</ion-label>
+    <ion-select placeholder="Select One">
+      <ion-select-option value="f">Dépôt</ion-select-option>
+      <ion-select-option value="m">Retrait</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <form [formGroup]="calcul">
+
+    <ion-item>
+      <ion-label position="floating">Montant</ion-label>
+      <ion-input formControlName="montant" type="text"></ion-input>
+    </ion-item>
+    <ion-footer class="ion-no-border">
+      <ion-button style="float: right;" (click)="showModal()" shape="round"> calculer </ion-button>
+    </ion-footer>
+  </form>
+</ion-content>
+
+<app-footer></app-footer>

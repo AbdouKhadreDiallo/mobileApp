@@ -1,0 +1,21 @@
+ion-content {
+    --background: #e5e5e5;
+
+    .header {
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        /* identical to box height */
+    
+        color: #000000;
+      }
+      .body {
+        font-family: Helvetica;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 11px;
+    
+        color: #000000;
+      }
+}

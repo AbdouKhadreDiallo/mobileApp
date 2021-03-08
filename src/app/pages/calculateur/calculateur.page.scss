@@ -1,0 +1,27 @@
+ion-content {
+  --background: #e5e5e5;
+  .type {
+    margin-top: 25px;
+  }
+  ion-item {
+    --background: none;
+    opacity: 1;
+  }
+  ion-footer {
+    position: fixed;
+    margin-top: 10px;
+    ion-button {
+      --background: #fa4a0c;
+      border-radius: 30px;
+      font-family: Helvetica;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      margin-right: 10px;
+      /* identical to box height */
+
+      color: #f6f6f9;
+    }
+  }
+  
+}

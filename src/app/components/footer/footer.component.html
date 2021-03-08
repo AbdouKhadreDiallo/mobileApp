@@ -1,0 +1,19 @@
+<ion-grid >
+  <ion-row>
+    <ion-col [routerLink]="'/accueil'" routerLinkActive='active-item' > 
+      <ion-icon  name="home"></ion-icon>
+    </ion-col>
+    <ion-col [routerLink]="'/transactions'" routerLinkActive='active-item' *ngIf="isAdmin == true || isUserAgence == true">
+      <ion-icon name="repeat"></ion-icon>
+    </ion-col>
+    <ion-col *ngIf="isAdmin" [routerLink]="'/commissions'" routerLinkActive='active-item' >
+      <ion-icon name="receipt"></ion-icon>
+    </ion-col>
+    <ion-col [routerLink]="'/calculateur'" routerLinkActive='active-item'>
+      <ion-icon   name="calculator"></ion-icon>
+    </ion-col>
+    <ion-col [routerLink]="'/liste-caissier'" routerLinkActive='active-item' *ngIf="isAdminSystem == true">
+      <ion-icon   name="people-sharp"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-grid>

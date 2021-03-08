@@ -1,0 +1,48 @@
+ion-content {
+  --background: #51bfd0;
+}
+
+.menu-item{
+    margin-top: 30%;
+    margin-left: 10%;
+    background-color: #51bfd0;;
+    width: 70%;
+    font-family: Poppins;
+    font-style: normal;
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+
+    span{
+      margin-left: 4%;
+    }
+    .bor{
+      color: white;
+      margin-left: 14%;
+      border: 1px solid white;
+      width: 50%;
+      height: 1px;
+    }
+}
+.menu-item-second{
+  margin-top: 7%;
+  margin-left: 10%;
+  background-color: #51bfd0;;
+  width: 70%;
+  font-family: Poppins;
+  font-style: normal;
+  font-size: 17px;
+  font-weight: 600;
+  color: white;
+
+  span{
+    margin-left: 4%;
+  }
+  .bor{
+    color: white;
+    margin-left: 14%;
+    border: 0.5px solid white;
+    width: 50%;
+  }
+}
+

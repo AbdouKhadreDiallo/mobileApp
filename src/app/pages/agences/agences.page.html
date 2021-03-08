@@ -1,0 +1,193 @@
+<app-header [data]="{icon:'layers-sharp', page:'Ajout Agence'}"></app-header>
+
+<ion-content [fullscreen]="true">
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Agence</ng-template>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">Nom</ion-label>
+            <ion-input formControlName="nomAgence" type="text"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.nom">
+                <div class="error-message" *ngIf="firstFormGroup.get('nomAgence').hasError(validation.type) && (firstFormGroup.get('nomAgence').dirty || firstFormGroup.get('nomAgence').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+              </div>
+          </div>
+        </ion-item>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">Adresse</ion-label>
+            <ion-input formControlName="adresse" type="text"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.agence">
+                <div class="error-message" *ngIf="firstFormGroup.get('adresse').hasError(validation.type) && (firstFormGroup.get('adresse').dirty || firstFormGroup.get('adresse').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+              </div>
+          </div>
+        </ion-item>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">Solde initiale</ion-label>
+            <ion-input formControlName="montant" type="text"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.montant">
+                <div class="error-message" *ngIf="firstFormGroup.get('montant').hasError(validation.type) && (firstFormGroup.get('montant').dirty || firstFormGroup.get('montant').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+              </div>
+          </div>
+        </ion-item>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Admin Agence</ng-template>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">Firstname</ion-label>
+            <ion-input formControlName="adminFirstname" type="text"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.nom">
+                <div class="error-message" *ngIf="secondFormGroup.get('adminFirstname').hasError(validation.type) && (secondFormGroup.get('adminFirstname').dirty || secondFormGroup.get('adminFirstname').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+              </div>
+          </div>
+        </ion-item>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">Lastname</ion-label>
+            <ion-input formControlName="adminLastname" type="text"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.nom">
+                <div class="error-message" *ngIf="secondFormGroup.get('adminLastname').hasError(validation.type) && (secondFormGroup.get('adminLastname').dirty || secondFormGroup.get('adminLastname').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+              </div>
+          </div>
+        </ion-item>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="adminEmail" type="email"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.email">
+                <div class="error-message" *ngIf="secondFormGroup.get('adminEmail').hasError(validation.type) && (secondFormGroup.get('adminEmail').dirty || secondFormGroup.get('adminEmail').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+              </div>
+          </div>
+        </ion-item>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">N° CNI</ion-label>
+            <ion-input formControlName="admincni" type="text"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.cin">
+                <div class="error-message" *ngIf="secondFormGroup.get('admincni').hasError(validation.type) && (secondFormGroup.get('admincni').dirty || secondFormGroup.get('admincni').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+              </div>
+          </div>
+          
+        </ion-item>
+        <div>
+          <button mat-button color="primary"  matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>User Agence</ng-template>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">Firstname</ion-label>
+            <ion-input formControlName="userFirstname" type="text"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.nom">
+                <div class="error-message" *ngIf="thirdFormGroup.get('userFirstname').hasError(validation.type) && (thirdFormGroup.get('userFirstname').dirty || thirdFormGroup.get('userFirstname').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ion-item>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">Lastname</ion-label>
+            <ion-input formControlName="userLastname" type="text"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.nom">
+                <div class="error-message" *ngIf="thirdFormGroup.get('userLastname').hasError(validation.type) && (thirdFormGroup.get('userLastname').dirty || thirdFormGroup.get('userLastname').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ion-item>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="userEmail" type="email"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.email">
+                <div class="error-message" *ngIf="thirdFormGroup.get('userEmail').hasError(validation.type) && (thirdFormGroup.get('userEmail').dirty || thirdFormGroup.get('userEmail').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ion-item>
+        <ion-item class="no-border">
+          <div class="changeColor">
+            <ion-label position="floating">N° CNI</ion-label>
+            <ion-input formControlName="usercni" type="text"></ion-input>
+            <div class="validation-errors">
+              <ng-container *ngFor="let validation of validation_messages.cin">
+                <div class="error-message" *ngIf="thirdFormGroup.get('usercni').hasError(validation.type) && (thirdFormGroup.get('usercni').dirty || thirdFormGroup.get('usercni').touched)">
+                <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </ion-item>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Finish</ng-template>
+      <p>Confirmation.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="onSubmit()">Save</button>
+      </div>
+      <div class="validation-errors">
+        <ng-container  *ngFor="let validation of validation_messages['all']">
+          <div class="error-message" *ngIf="wrong">
+          <span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+          </div>
+        </ng-container>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</ion-content>
+
+<app-footer></app-footer>

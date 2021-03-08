@@ -1,0 +1,40 @@
+<app-header [data]="{icon:'layers-sharp', page:'Listes Agences'}" ></app-header>
+
+<ion-content [fullscreen]="true">
+    <ion-row>
+        <ion-col col-3>
+            <ion-label class="header">Nom</ion-label>
+        </ion-col>
+        <ion-col col-3>
+            <ion-label class="header">Adresse</ion-label>
+        </ion-col>
+        <ion-col col-3>
+            <ion-label class="header">Téléphone</ion-label>
+        </ion-col>
+        <ion-col col-3>
+            <ion-label class="header">Action</ion-label>
+        </ion-col>
+    </ion-row>
+    <div *ngFor="let item of agences">
+        <ion-row>
+            <ion-col col-3>
+                <ion-label class="body"> {{item.nom}} </ion-label>
+            </ion-col>
+            <ion-col col-3>
+                <ion-label class="body">{{item.adresse}}</ion-label>
+            </ion-col>
+            <ion-col col-3>
+                <ion-label class="body"> {{item.telephone}} </ion-label>
+            </ion-col>
+            <ion-col col-3 *ngIf="item.isActive == false" (click)="deBlock(item.id)">
+                <ion-label class="body" style="color: red;"> Deblocker </ion-label>
+            </ion-col>
+            <ion-col col-3 *ngIf="item.isActive == true" (click)="showConfirm(item.id)" >
+                <ion-label class="body" style="color: #51BFD0;"> bloquer </ion-label>
+            </ion-col>
+        </ion-row>
+    </div>
+
+</ion-content>
+
+<app-footer></app-footer>

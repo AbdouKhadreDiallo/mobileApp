@@ -1,0 +1,124 @@
+<app-header [data]="{icon:'return-up-forward', page:'Dépôt'}" ></app-header>
+
+<ion-content [fullscreen]="true" class="container">
+	
+	<div class="accordion">
+		<ion-grid>
+			<ion-row>
+				<ion-col (click)="openCity($event, 'emetteur')" id="defaultOpen" class="tablinks" routerLinkActive='active-item'>Emeteur</ion-col>
+				<ion-col (click)="openCity($event, 'recepteur')" class="tablinks" routerLinkActive='active-item'>Bénéficiaire</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+	<form [formGroup]="depot">
+		<div id="emetteur" class="tabcontent">
+			<ion-item class="no-border">
+				<div class="changeColor">
+					<ion-label position="floating">N° CNI</ion-label>
+					<ion-input formControlName="senderCIN" type="text"></ion-input>
+					<div class="validation-errors">
+						<ng-container *ngFor="let validation of validation_messages.cin">
+						  <div class="error-message" *ngIf="depot.get('senderCIN').hasError(validation.type) && (depot.get('senderCIN').dirty || depot.get('senderCIN').touched)">
+							<span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+						  </div>
+						</ng-container>
+					  </div>
+				</div>
+			</ion-item>
+			<ion-item>
+				<ion-label position="floating">Nom & Prenom</ion-label>
+				<ion-input formControlName="senderFullname" type="text"></ion-input>
+				<div class="validation-errors">
+					<ng-container *ngFor="let validation of validation_messages.fullname">
+					  <div class="error-message" *ngIf="depot.get('senderFullname').hasError(validation.type) && (depot.get('senderFullname').dirty || depot.get('senderFullname').touched)">
+						<span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+					  </div>
+					</ng-container>
+				  </div>
+			</ion-item>
+			
+			<ion-item>
+				<ion-label position="floating">Téléphone</ion-label>
+				<ion-input formControlName="senderTelephone" type="text"></ion-input>
+				<div class="validation-errors">
+					<ng-container *ngFor="let validation of validation_messages.senderTelephone">
+					  <div class="error-message" *ngIf="depot.get('senderTelephone').hasError(validation.type) && (depot.get('senderTelephone').dirty || depot.get('senderTelephone').touched)">
+						<span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+					  </div>
+					</ng-container>
+				  </div>
+			</ion-item>
+			<ion-item>
+				<ion-label position="floating">Montant</ion-label>
+				<ion-input (change)="handleChnage()" formControlName="montant" type="text"></ion-input>
+				<div class="validation-errors">
+					<ng-container *ngFor="let validation of validation_messages.montant">
+					  <div class="error-message" *ngIf="depot.get('montant').hasError(validation.type) && (depot.get('montant').dirty || depot.get('montant').touched)">
+						<span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+					  </div>
+					</ng-container>
+				  </div>
+			</ion-item>
+			<ion-item style="width: 100px;">
+				<ion-label>
+					<p>Frais</p>
+					<h2 id="frais"> </h2>
+				  </ion-label>
+				<!-- <ion-label position="floating">Frais</ion-label>
+				<ion-input id="frais" formControlName="frais" style="width: 20px;" type="text"></ion-input> -->
+			</ion-item>
+			<ion-item style="width: 100px;float: right; margin-bottom: 30px;">
+				<ion-label>
+					<p>Total</p>
+					<h2 id="total"> </h2>
+				  </ion-label>
+				<!-- <ion-label position="floating">Total</ion-label>
+				<ion-input formControlName="total" type="text"></ion-input> -->
+			</ion-item>
+		</div>
+		<div id="recepteur" class="tabcontent" >
+			<ion-item>
+				<ion-label position="floating">Prénom $ Nom</ion-label>
+				<ion-input formControlName="receiverFullname" type="text"></ion-input>
+				<div class="validation-errors">
+					<ng-container *ngFor="let validation of validation_messages.fullname">
+					  <div class="error-message" *ngIf="depot.get('receiverFullname').hasError(validation.type) && (depot.get('receiverFullname').dirty || depot.get('receiverFullname').touched)">
+						<span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+					  </div>
+					</ng-container>
+				  </div>
+			</ion-item>
+
+			<ion-item>
+				<ion-label position="floating">N° CNI</ion-label>
+				<ion-input formControlName="receiverCIN" type="text"></ion-input>
+				<div class="validation-errors">
+					<ng-container *ngFor="let validation of validation_messages.cin">
+					  <div class="error-message" *ngIf="depot.get('receiverCIN').hasError(validation.type) && (depot.get('receiverCIN').dirty || depot.get('receiverCIN').touched)">
+						<span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+					  </div>
+					</ng-container>
+				  </div>
+			</ion-item>
+			
+			<ion-item>
+				<ion-label position="floating">Téléphone</ion-label>
+				<ion-input formControlName="receiverTelephone" type="text"></ion-input>
+				<div class="validation-errors">
+					<ng-container *ngFor="let validation of validation_messages.senderTelephone">
+					  <div class="error-message" *ngIf="depot.get('receiverTelephone').hasError(validation.type) && (depot.get('receiverTelephone').dirty || depot.get('receiverTelephone').touched)">
+						<span style="color: red; font-size: 10px;">{{ validation.message }}</span> 
+					  </div>
+					</ng-container>
+				  </div>
+			</ion-item>
+		</div>
+		<ion-footer class="ion-no-border" style="margin-top: 40px;">
+			<ion-button [disabled]="!depot.valid" class="sameColor resize" (click)="depotFunction()" shape="round" expand="block">Suivant</ion-button>
+		  </ion-footer>
+		
+
+
+
+	</form>
+</ion-content>
