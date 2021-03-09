@@ -29,7 +29,7 @@ export class RetraitPage implements OnInit {
   constructor(public popoverController: PopoverController, private shared: SharedService, public fb:FormBuilder,public alertCtrl: AlertController) {
     const num = /^[0-9]*$/;
     this.retrait = this.fb.group({
-      code: ['', [Validators.required, Validators.pattern(num)]],
+      code: ['', [Validators.required]],
       cni:  [
         '',
         [Validators.required, Validators.minLength(13), Validators.pattern(num)],
@@ -41,7 +41,6 @@ export class RetraitPage implements OnInit {
   validation_messages = {
     code: [
       { type: 'required', message: 'Le code est obligatoire' },
-      { type: 'pattern', message: 'le code doit etre numerique.' },
     ],
     cni: [
       { type: 'required', message: 'Le cni est obligatoire' },

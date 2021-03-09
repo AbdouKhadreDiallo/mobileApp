@@ -15,6 +15,8 @@ export class ModalComponent implements OnInit {
     type:"success",
     sortie: "hehe"
   }
+  wrong: boolean = false;
+  validation_messages = {};
   
 
   constructor(private popCtrl: PopoverController, public shared: SharedService) { }
@@ -45,9 +47,22 @@ export class ModalComponent implements OnInit {
         });
         await pop.present();
       }, 
-      err => {
-        console.log(err);
+      async err => {
+        this.wrong = true;
+        const shown = {
+          type: 'reussi'
+        }
+        console.log(this.wrong);
         
+        let pop = await this.popCtrl.create({
+          component: ModalComponent,
+          componentProps: {
+            data: shown
+          }
+        });
+        this.validation_messages['all'] = [
+          {  message: err['error']['message'] },
+        ];
       }
     )
       

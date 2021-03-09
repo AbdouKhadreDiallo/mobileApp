@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import jwt_decode from 'jwt-decode';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class LoginService {
   public localStorage = window.localStorage;
   isAdminAgence = false;
   public message = "invalid";
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, public alertCtrl: AlertController) {}
 
   login(username: string, password: string) {
     const credentials = {
@@ -20,7 +21,7 @@ export class LoginService {
     };
     return this.http.post(`${this.baseUrl}/login`, credentials);
   }
-  public getToken(username: string, password: string) {
+  async  getToken(username: string, password: string) {
     this.login(username, password).subscribe(
       (token: { token: string }) => {
         localStorage.setItem('token', token.token);
@@ -59,13 +60,28 @@ export class LoginService {
     return authToken !== null ? true : false;
   }
 
-  logout() {
-    if (confirm('Voulez-vous vous deconnectez ?')) {
-      let removeToken = localStorage.removeItem('token');
-      if (removeToken == null) {
-        this.router.navigate(['login']);
+  async logout() {
+
+  const confirm = await this.alertCtrl.create({
+    header: 'Confirmation',
+    message: 'Voulez-vous vous deconnectez ?',
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+      },
+      {
+        text: 'Oui',
+        handler: () => {
+          let removeToken = localStorage.removeItem('token');
+          if (removeToken == null) {
+            this.router.navigate(['login']);
+          }
+        }
       }
-    }
+    ]
+  })
+  await confirm.present();
   }
   
 

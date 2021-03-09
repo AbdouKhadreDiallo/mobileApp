@@ -17,8 +17,13 @@ export class DepotPage implements OnInit {
   depot: FormGroup;
   dataSended: any;
   somme;
+  indispo;
 
   currentModal = null;
+  wrong: boolean = false;
+  montant: any;
+  xasliss: any;
+  insdisponible: boolean = false;
 
   constructor(
     public popoverController: PopoverController,
@@ -32,13 +37,13 @@ export class DepotPage implements OnInit {
       senderFullname: ['', [Validators.required]],
       senderCIN: [
         '',
-        [Validators.required, Validators.minLength(9), Validators.pattern(num)],
+        [Validators.required, Validators.minLength(13),Validators.maxLength(13), Validators.pattern(num)],
       ],
       senderTelephone: ['', [Validators.required, Validators.pattern(regexxx)]],
       receiverFullname: ['', [Validators.required]],
       receiverCIN: [
         '',
-        [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
+        [Validators.required, Validators.minLength(13),Validators.maxLength(13)],
       ],
       receiverTelephone: [
         '',
@@ -63,19 +68,34 @@ export class DepotPage implements OnInit {
       { type: 'pattern', message: 'le montant doit etre numerique.' },
     ],
     fullname: [{ type: 'required', message: 'Le fullname est obligatoire' }],
+    
   };
+ 
+
+  ngOnInit() {
+    document.getElementById('defaultOpen').click();
+    this.shared.get('/compte/user').subscribe(
+      data => {
+        this.montant = data['solde'];
+        
+      }
+    )
+  }
   handleChnage() {
     this.somme = this.depot.value.montant;
+    this.insdisponible = false;
+    
+    if (this.somme > this.montant) {
+      this.insdisponible = true
+      this.indispo = "montant indisponible"
+      
+
+    }
     this.depot.value.frais = this.somme;
     let frais = this.calculTaxe(this.somme);
     let total = parseInt(this.somme) + frais;
     document.getElementById('frais').innerHTML = frais.toString();
     document.getElementById('total').innerHTML = total.toString();
-    console.log(this.somme);
-  }
-
-  ngOnInit() {
-    document.getElementById('defaultOpen').click();
   }
   openCity(evt, cityName) {
     var i, tabcontent, tablinks;
@@ -106,7 +126,6 @@ export class DepotPage implements OnInit {
       },
       montant: parseInt(this.depot.value.montant),
     };
-    console.log(this.dataSended);
     // return
 
     let pop = await this.popoverController.create({
@@ -120,9 +139,9 @@ export class DepotPage implements OnInit {
   }
 
   async showConfirm(datas) {
-    //console.log(data);
     
     const confirm = await this.alertCtrl.create({
+      cssClass:'alertController',
       header: 'Confirmation',
       message: `
         <ion-list>
@@ -169,18 +188,15 @@ export class DepotPage implements OnInit {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Confirm Cancel');
           },
         },
         {
           text: 'Oui',
           handler: () => {
-            console.log(datas);
             
             this.shared
               .transaction('/transactions/depot', datas)
               .subscribe(async (data) => {
-                console.log(data);
                 
                 this.depot.reset();
                 const confirmation = await this.alertCtrl.create({
@@ -220,7 +236,16 @@ export class DepotPage implements OnInit {
                   ],
                 });
                 await confirmation.present();
-              });
+              },
+              err => {
+                
+                this.wrong = true;
+                this.validation_messages['all'] = [
+                  {  message: err['error']['message'] },
+                ];
+              }
+              
+              );
           },
         },
       ],
@@ -237,7 +262,13 @@ export class DepotPage implements OnInit {
   }
 
   depotFunction() {
-
+    if (!this.depot.valid) {
+      this.wrong = true;
+      this.validation_messages['all'] = [
+        {  message: 'formulaire invalid' },
+      ];
+      return false;
+    }
 
     this.dataSended = {
       sender: {
